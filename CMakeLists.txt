@@ -26,15 +26,9 @@ include_directories(
   /opt/MVS/include/
 )
 
-if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
-  LINK_DIRECTORIES(
-  /opt/MVS/lib/aarch64/
-  )
-elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
-  LINK_DIRECTORIES(
-  /opt/MVS/lib/64/
-  )
-endif()
+LINK_DIRECTORIES(
+/opt/MVS/lib/aarch64/
+)
 
 add_executable(${PROJECT_NAME}
 src/hikrobot_camera.cpp)
@@ -43,16 +37,4 @@ src/hikrobot_camera.cpp)
    ${catkin_LIBRARIES}
    ${OpenCV_LIBRARIES}
    MvCameraControl
-   # GCBase_gcc421_v3_0
-   # GenApi_gcc421_v3_0
-   # MVGigEVisionSDK
-   # log4cpp_gcc421_v3_0
-   # MVRender
-   # Log_gcc421_v3_0
-   # MvUsb3vTL
-   # MathParser_gcc421_v3_0
-   # NodeMapData_gcc421_v3_0
-   # MediaProcess
-   # XmlParser_gcc421_v3_0
-   # X11
  )

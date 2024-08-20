@@ -7,6 +7,22 @@
 #include "MvErrorDefine.h"
 #include "CameraParams.h"
 #include "MvCameraControl.h"
+#include <unistd.h>
+#include <chrono>
+
+#include <iostream>
+#include <fcntl.h>
+#include <sys/ipc.h>
+#include <sys/mman.h>
+
+struct time_stamp {
+  int64_t high;
+  int64_t low;
+};
+
+time_stamp *pointt;
+
+using namespace std;
 
 namespace camera
 {
@@ -176,7 +192,7 @@ namespace camera
         // printf("\n%d\n",GammaEnable);
         if (GammaEnable)
             this->set(CAP_PROP_GAMMA, Gamma);
-        this->set(CAP_PROP_GAINAUTO, GainAuto);
+          this->set(CAP_PROP_GAINAUTO, GainAuto);
         // this->set(CAP_PROP_TRIGGER_MODE, TriggerMode);
         // this->set(CAP_PROP_TRIGGER_SOURCE, TriggerSource);
         // this->set(CAP_PROP_LINE_SELECTOR, LineSelector);
@@ -206,7 +222,7 @@ namespace camera
             this->set(CAP_PROP_SATURATION, Saturation);
         //软件触发
         // ********** frame **********/
-        nRet = MV_CC_SetEnumValue(handle, "TriggerMode", 0);
+        nRet = MV_CC_SetEnumValue(handle, "TriggerMode", TriggerMode);
         if (MV_OK == nRet)
         {
             printf("set TriggerMode OK!\n");
